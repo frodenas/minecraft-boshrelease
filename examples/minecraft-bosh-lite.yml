@@ -1,0 +1,85 @@
+<%
+director_uuid = 'CHANGE-ME'
+deployment_name = 'minecraft'
+%>
+---
+name: <%= deployment_name %>
+director_uuid: <%= director_uuid %>
+
+releases:
+ - name: minecraft
+   version: latest
+
+compilation:
+  workers: 1
+  network: default
+  reuse_compilation_vms: true
+  cloud_properties: {}
+
+update:
+  canaries: 0
+  canary_watch_time: 30000-60000
+  update_watch_time: 30000-60000
+  max_in_flight: 32
+  serial: false
+
+networks:
+  - name: default
+    type: manual
+    subnets:
+      - cloud_properties: {}
+        range: 10.244.0.0/30
+        reserved:
+          - 10.244.0.1
+        static:
+          - 10.244.0.2
+
+      - cloud_properties: {}
+        name: random
+        range: 10.244.0.4/30
+        reserved:
+          - 10.244.0.5
+        static:
+          - 10.244.0.6
+
+      - cloud_properties: {}
+        name: random
+        range: 10.244.0.8/30
+        reserved:
+          - 10.244.0.9
+
+resource_pools:
+  - name: default
+    network: default
+    stemcell:
+      name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+      version: latest
+    cloud_properties: {}
+
+jobs:
+  - name: minecraft
+    templates:
+      - name: minecraft
+    instances: 1
+    resource_pool: default
+    networks:
+      - name: default
+        default: [dns, gateway]
+        static_ips:
+          - 10.244.0.2
+
+  - name: pocketmine
+    templates:
+      - name: pocketmine
+    instances: 1
+    resource_pool: default
+    networks:
+      - name: default
+        default: [dns, gateway]
+        static_ips:
+          - 10.244.0.6
+
+properties:
+  minecraft:
+    accept_eula: true
+    version: "1.8.8"

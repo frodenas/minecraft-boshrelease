@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+
+# Setup common env vars and folders
+source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'minecraft'
+export MINECRAFT_PID_FILE=${MINECRAFT_PID_DIR}/minecraft.pid
+
+case $1 in
+
+  start)
+    pid_guard ${MINECRAFT_PID_FILE} ${JOB_NAME}
+    echo $$ > ${MINECRAFT_PID_FILE}
+
+    # Create Minecraft Server user & group
+    create_group ${MINECRAFT_GROUP}
+    create_user ${MINECRAFT_USER} ${MINECRAFT_GROUP}
+
+    # Copy Minecraft Server configuration files
+    cp ${MINECRAFT_CONF_DIR}/banned-ips.json ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/banned-players.json ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/eula.txt ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/ops.json ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/server.properties ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/usercache.json ${MINECRAFT_STORE_DIR}
+    cp ${MINECRAFT_CONF_DIR}/whitelist.json ${MINECRAFT_STORE_DIR}
+    chown -R ${MINECRAFT_USER}:${MINECRAFT_GROUP} ${MINECRAFT_STORE_DIR}/*
+
+    # Start Minecraft Server service
+    cd ${MINECRAFT_STORE_DIR}
+    exec chpst -u ${MINECRAFT_USER}:${MINECRAFT_GROUP} java \
+      -Xmx"${MINECRAFT_JAVA_HEAP_SIZE}" \
+      -Xms"${MINECRAFT_JAVA_HEAP_SIZE}" \
+      -Dfile.encoding=UTF-8 \
+      -Djava.io.tmpdir=${MINECRAFT_TMP_DIR} \
+      -Djava.net.preferIPv4Stack=${MINECRAFT_PREFER_IPV4_STACK} \
+      -jar /var/vcap/packages/minecraft/minecraft_server.${MINECRAFT_VERSION}.jar nogui \
+      >>${MINECRAFT_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
+      2>>${MINECRAFT_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
+    ;;
+
+  stop)
+    # Stop Minecraft Server service
+    kill_and_wait ${MINECRAFT_PID_FILE}
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0

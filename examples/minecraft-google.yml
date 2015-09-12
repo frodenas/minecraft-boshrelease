@@ -1,0 +1,75 @@
+<%
+director_uuid = 'CHANGE-ME'
+deployment_name = 'minecraft'
+static_ip = 'CHANGE-ME'
+%>
+---
+name: <%= deployment_name %>
+director_uuid: <%= director_uuid %>
+
+releases:
+ - name: minecraft
+   version: latest
+
+compilation:
+  workers: 1
+  network: default
+  reuse_compilation_vms: true
+  cloud_properties:
+    machine_type: n1-standard-8
+    preemptible: true
+
+update:
+  canaries: 0
+  canary_watch_time: 30000-60000
+  update_watch_time: 30000-60000
+  max_in_flight: 32
+  serial: false
+
+networks:
+  - name: default
+    type: dynamic
+    cloud_properties:
+      ephemeral_external_ip: true
+      tags:
+        - bosh
+        - <%= deployment_name %>
+
+  - name: static
+    type: vip
+    cloud_properties: {}
+
+resource_pools:
+  - name: default
+    network: default
+    stemcell:
+      name: bosh-google-kvm-ubuntu-trusty-go_agent
+      version: latest
+    cloud_properties:
+      machine_type: n1-highmem-8
+
+disk_pools:
+  - name: default
+    disk_size: 65536
+    cloud_properties:
+      type: pd-ssd
+
+jobs:
+  - name: minecraft
+    templates:
+      - name: minecraft
+      - name: pocketmine
+    instances: 1
+    resource_pool: default
+    persistent_disk_pool: default
+    networks:
+      - name: default
+        default: [dns, gateway]
+      - name: static
+        static_ips:
+          - <%= static_ip %>
+
+properties:
+  minecraft:
+    accept_eula: true
+    version: "1.8.8"

@@ -1,0 +1,19 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=`grep -c ^processor /proc/cpuinfo`
+
+# We grab the latest versions that are in the directory
+POCKETMINE_VERSION=`ls -r pocketmine/PocketMine-MP_*.tgz | sed 's/pocketmine\/PocketMine-MP_\(.*\)\.tgz/\1/' | head -1`
+
+# Extract PocketMine package
+echo "Extracting PocketMine ${POCKETMINE_VERSION}..."
+tar xzvf ${BOSH_COMPILE_TARGET}/pocketmine/PocketMine-MP_${POCKETMINE_VERSION}.tgz
+if [[ $? != 0 ]] ; then
+  echo "Failed extracting PocketMine ${POCKETMINE_VERSION}"
+  exit 1
+fi
+
+# Copy PocketMine package
+cp ${BOSH_COMPILE_TARGET}/PocketMine-MP_${POCKETMINE_VERSION}.phar ${BOSH_INSTALL_TARGET}/PocketMine-MP.phar

@@ -1,0 +1,323 @@
+---
+name: pocketmine
+
+packages:
+  - bosh-helpers
+  - php
+  - pocketmine
+
+templates:
+  bin/job_properties.sh.erb: bin/job_properties.sh
+  bin/pocketmine_ctl.erb: bin/pocketmine_ctl
+  config/banned-ips.txt.erb: config/banned-ips.txt
+  config/banned-players.txt.erb: config/banned-players.txt
+  config/ops.txt.erb: config/ops.txt
+  config/pocketmine.yml.erb: config/pocketmine.yml
+  config/server.properties.erb: config/server.properties
+  config/white-list.txt.erb: config/white-list.txt
+
+properties:
+  pocketmine.user:
+    description: "User which will own the PocketMine services"
+    default: "root"
+  pocketmine.group:
+    description: "Group which will own the PocketMine services"
+    default: "vcap"
+  pocketmine.allow_flight:
+    description: "Allows users to use flight on your server while in Survival mode, if they have a mod that provides flight installed"
+    default: "off"
+  pocketmine.announce_player_achievements:
+    description: "Allows server to announce when a player gets an achievement"
+    default: "on"
+  pocketmine.auto_save:
+    description: "Auto save"
+    default: "on"
+  pocketmine.difficulty:
+    description: "Defines the difficulty (such as damage dealt by mobs and the way hunger and poison affects players) of the server (0: Peaceful, 1: Easy, 2: Normal, 3: Hard)"
+    default: 1
+  pocketmine.enable_query:
+    description: "Enables GameSpy4 protocol server listener. Used to get information about server"
+    default: "on"
+  pocketmine.enable_rcon:
+    description: "Enables remote access to the server console"
+    default: "off"
+  pocketmine.force_gamemode:
+    description: "Force players to join in the default game mode"
+    default: "off"
+  pocketmine.gamemode:
+    description: "Defines the mode of gameplay (0: Survival, 1: Creative, 2: Adventure, 3: Spectator)"
+    default: 0
+  pocketmine.generator_settings:
+    description: "The settings used to customize world generation"
+    default: ""
+  pocketmine.hardcore:
+    description: "If set to true, players will be permanently banned if they die"
+    default: "off"
+  pocketmine.level_name:
+    description: "World name and its folder name"
+    default: "world"
+  pocketmine.level_seed:
+    description: "Seed for your world"
+    default: ""
+  pocketmine.level_type:
+    description: "Determines the type of map that is generated (DEFAULT, FLAT, LARGEBIOMES, AMPLIFIED, CUSTOMIZED)"
+    default: "DEFAULT"
+  pocketmine.max_players:
+    description: "The maximum number of players that can play on the server at the same time"
+    default: 20
+  pocketmine.motd:
+    description: "This is the message that is displayed in the server list of the client, below the name"
+    default: "A PocketMine Server"
+  pocketmine.pvp:
+    description: "Enable PvP on the server. Players shooting themselves with arrows will only receive damage if PvP is enabled"
+    default: "on"
+  pocketmine.query_port:
+    description: "Sets the port for the query serve"
+    default: 19132
+  pocketmine.rcon_password:
+    description: "Sets the password to rcon."
+    default: ""
+  pocketmine.rcon_port:
+    description: "Sets the port to rcon"
+    default: 25575
+  pocketmine.server_name:
+    description: "Set the name of the server"
+    default: "Minecraft: PE Server"
+  pocketmine.server_port:
+    description: "Changes the port the server is hosting (listening) on"
+    default: 19132
+  pocketmine.spawn_animals:
+    description: "Determines if animals will be able to spawn"
+    default: "on"
+  pocketmine.spawn_mobs:
+    description: "Determines if mobs will be spawned"
+    default: "on"
+  pocketmine.spawn_protection:
+    description: "Determines the radius of the spawn protection"
+    default: 16
+  pocketmine.white_list:
+    description: "Enables a whitelist on the server"
+    default: "off"
+  pocketmine.banned_ips:
+    description: "Array of banned IPs"
+    default: []
+  pocketmine.banned_players:
+    description: "Array of banned players"
+    default: []
+  pocketmine.ops:
+    description: "Array of ops"
+    default: []
+  pocketmine.whitelist:
+    description: "Array of whitelists"
+    default: []
+
+  pocketmine.settings.language:
+    description: "Three-letter language code for server-side localization"
+    default: "eng"
+  pocketmine.settings.force_language:
+    description: "Whether to send all strings translated to server locale or let the device handle them"
+    default: false
+  pocketmine.settings.shutdown_message:
+    description: "Shutdown message"
+    default: "Server closed"
+  pocketmine.settings.query_plugins:
+    description: "Allow listing plugins via Query"
+    default: true
+  pocketmine.settings.deprecated_verbose:
+    description: "Show a console message when a plugin uses deprecated API methods"
+    default: true
+  pocketmine.settings.enable_profiling:
+    description: "Enable plugin and core profiling by default"
+    default: false
+  pocketmine.settings.profile_report_trigger:
+    description: "Will only add results when tick measurement is below or equal to given value"
+    default: 20
+  pocketmine.settings.async_workers:
+    description: "Number of AsyncTask workers"
+    default: "auto"
+
+  pocketmine.memory.global_limit:
+    description: "Global soft memory limit in megabytes. Set to 0 to disable"
+    default: 0
+  pocketmine.memory.main_limit:
+    description: "Main thread soft memory limit in megabytes. Set to 0 to disable"
+    default: 0
+  pocketmine.memory.main_hard_limit:
+    description: "Main thread hard memory limit in megabytes. Set to 0 to disable"
+    default: 1024
+  pocketmine.memory.check_rate:
+    description: "Period in ticks to check memory (default 1 second)"
+    default: 20
+  pocketmine.memory.continuous_trigger:
+    description: "Continue firing low-memory-triggers and event while on low memory"
+    default: true
+  pocketmine.memory.continuous_trigger_rate:
+    description: "Only if memory.continuous-trigger is enabled. Specifies the rate in memory.check-rate steps"
+    default: 30
+
+  pocketmine.memory.garbage_collection.period:
+    description: "Period in ticks to fire the garbage collector manually"
+    default: 36000
+  pocketmine.memory.garbage_collection.collect_async_worker:
+    description: "Fire asynchronous tasks to collect garbage from workers"
+    default: true
+  pocketmine.memory.garbage_collection.low_memory_trigger:
+    description: "Trigger on low memory"
+    default: true
+
+  pocketmine.memory.max_chunks.trigger_limit:
+    description: "Limit of chunks to load per player, overrides chunk-sending.max-chunks"
+    default: 96
+  pocketmine.memory.max_chunks.trigger_chunk_collect:
+    description: "Do chunk garbage collection on trigger"
+    default: true
+  pocketmine.memory.max_chunks.low_memory_trigger:
+    description: "Trigger on low memory"
+    default: true
+
+  pocketmine.memory.world_caches.disable_chunk_cache:
+    description: "Disable chunck cache"
+    default: true
+  pocketmine.memory.world_caches.low_memory_trigger:
+    description: "Low memory triggery"
+    default: true
+
+  pocketmine.network.batch_threshold:
+    description: "Threshold for batching packets, in bytes. Only these packets will be compressed"
+    default: 256
+  pocketmine.network.compression_level:
+    description: "Compression level used when sending batched packets. Higher = more CPU, less bandwidth usage"
+    default: 7
+  pocketmine.network.async_compression:
+    description: "Use AsyncTasks for compression. Adds half/one tick delay, less CPU load on main thread"
+    default: false
+  pocketmine.network.upnp_forwarding:
+    description: "Experimental, only for Windows. Tries to use UPnP to automatically port forward"
+    default: false
+
+  pocketmine.debug.level:
+    description: "If > 1, it will show debug messages in the console"
+    default: 1
+  pocketmine.debug.commands:
+    description: "Enables /status, /gc"
+    default: false
+
+  pocketmine.level_settings.default_format:
+    description: "The default format that levels will use when created"
+    default: "mcregion"
+  pocketmine.level_settings.convert_format:
+    description: "If true, converts from a format that is not the default to the default format on load"
+    default: false
+  pocketmine.level_settings.auto_tick_rate:
+    description: "Automatically change levels tick rate to maintain 20 ticks per second"
+    default: true
+  pocketmine.level_settings.auto_tick_rate_limit:
+    description: "Automatically change levels tick rate to maintain 20 ticks per second"
+    default: 20
+  pocketmine.level_settings.base_tick_rate:
+    description: "Sets the base tick rate"
+    default: 1
+  pocketmine.level_settings.always_tick_players:
+    description: "Tick all players each tick even when other settings disallow this"
+    default: false
+
+  pocketmine.chunk_sending.per_tick:
+    description: "Amount of chunks sent to players per tick"
+    default: 4
+  pocketmine.chunk_sending.max_chunks:
+    description: "Amount of chunks sent around each player"
+    default: 192
+  pocketmine.chunk_sending.spawn_threshold:
+    description: "Amount of chunks that need to be sent before spawning the player"
+    default: 56
+  pocketmine.chunk_sending.cache_chunks:
+    description: "Save a serialized copy of the chunk in memory for faster sending"
+    default: false
+
+  pocketmine.chunk_ticking.per_tick:
+    description: "Max amount of chunks processed each tick"
+    default: 40
+  pocketmine.chunk_ticking.tick_radius:
+    description: "Radius of chunks around a player to tick"
+    default: 3
+  pocketmine.chunk_ticking.light_updates:
+    description: "Light updates"
+    default: false
+  pocketmine.chunk_ticking.clear_tick_list:
+    description: "Clear tick list"
+    default: true
+
+  pocketmine.chunk_generation.queue_size:
+    description: "Max. amount of chunks in the waiting queue to be generated"
+    default: 8
+  pocketmine.chunk_generation.population_queue_size:
+    description: "Max. amount of chunks in the waiting queue to be populated"
+    default: 8
+
+  pocketmine.ticks_per.animal_spawns:
+    description: "Ticks per animal spawn"
+    default: 400
+  pocketmine.ticks_per.monster_spawns:
+    description: "Ticks per monster spawn"
+    default: 1
+  pocketmine.ticks_per.autosave:
+    description: "Ticks per autosave"
+    default: 6000
+  pocketmine.ticks_per.cache_cleanup:
+    description: "Ticks per cache cleanup"
+    default: 900
+
+  pocketmine.spawn_limits.monsters:
+    description: "Monsters spawn limit"
+    default: 70
+  pocketmine.spawn_limits.animals:
+    description: "Animals spawn limit"
+    default: 15
+  pocketmine.spawn_limits.water_animals:
+    description: "Water animals spawn limit"
+    default: 5
+  pocketmine.spawn_limits.ambient:
+    description: "Ambient spawn limit"
+    default: 15
+
+  pocketmine.auto_report.enabled:
+    description: "Send crash reports for processing"
+    default: true
+  pocketmine.auto_report.send_code:
+    description: "Send code when sending crash reports for processing"
+    default: true
+  pocketmine.auto_report.send_settings:
+    description: "Send settings when sending crash reports for processing"
+    default: true
+  pocketmine.auto_report.send_phpinfo:
+    description: "Send phpinfo when sending crash reports for processing"
+    default: false
+  pocketmine.auto_report.host:
+    description: "Host where to send crash reports for processing"
+    default: "crash.pocketmine.net"
+
+  pocketmine.anonymous_statistics.enabled:
+    description: "Enable/Disable sending anonymous statistics for data aggregation, plugin usage tracking"
+    default: true
+  pocketmine.anonymous_statistics.host:
+    description: "Host where to send anonymous statistics for data aggregation, plugin usage tracking"
+    default: "stats.pocketmine.net"
+
+  pocketmine.auto_updater.enabled:
+    description: "Enable/Disable auto-updater"
+    default: false
+  pocketmine.auto_updater.on_update.warn_console:
+    description: "Warm console on update"
+    default: true
+  pocketmine.auto_updater.on_update.warn_ops:
+    description: "Warm ops on update"
+    default: true
+  pocketmine.auto_updater.preferred_channel:
+    description: "Can be development, beta or stable"
+    default: "beta"
+  pocketmine.auto_updater.suggest_channels:
+    description: "If using a development version, it will suggest changing the channel"
+    default: true
+  pocketmine.auto_updater.host:
+    description: "Auto-updater host"
+    default: "www.pocketmine.net"

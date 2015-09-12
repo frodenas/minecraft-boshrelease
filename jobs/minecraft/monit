@@ -1,0 +1,5 @@
+check process minecraft
+  with pidfile /var/vcap/sys/run/minecraft/minecraft.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger minecraft_ctl '/var/vcap/jobs/minecraft/bin/minecraft_ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger minecraft_ctl '/var/vcap/jobs/minecraft/bin/minecraft_ctl stop'"
+  group vcap

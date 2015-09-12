@@ -1,0 +1,5 @@
+check process pocketmine
+  with pidfile /var/vcap/sys/run/pocketmine/pocketmine.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger pocketmine_ctl '/var/vcap/jobs/pocketmine/bin/pocketmine_ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger pocketmine_ctl '/var/vcap/jobs/pocketmine/bin/pocketmine_ctl stop'"
+  group vcap

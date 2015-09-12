@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+
+# Setup common env vars and folders
+source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'pocketmine'
+export POCKETMINE_PID_FILE=${POCKETMINE_PID_DIR}/pocketmine.pid
+
+case $1 in
+
+  start)
+    pid_guard ${POCKETMINE_PID_FILE} ${JOB_NAME}
+    echo $$ > ${POCKETMINE_PID_FILE}
+
+    # Create PocketMine Server user & group
+    create_group ${POCKETMINE_GROUP}
+    create_user ${POCKETMINE_USER} ${POCKETMINE_GROUP}
+
+    # Copy PocketMine Server configuration files
+    cp ${POCKETMINE_CONF_DIR}/banned-ips.txt ${POCKETMINE_STORE_DIR}
+    cp ${POCKETMINE_CONF_DIR}/banned-players.txt ${POCKETMINE_STORE_DIR}
+    cp ${POCKETMINE_CONF_DIR}/ops.txt ${POCKETMINE_STORE_DIR}
+    cp ${POCKETMINE_CONF_DIR}/pocketmine.yml ${POCKETMINE_STORE_DIR}
+    cp ${POCKETMINE_CONF_DIR}/server.properties ${POCKETMINE_STORE_DIR}
+    cp ${POCKETMINE_CONF_DIR}/white-list.txt ${POCKETMINE_STORE_DIR}
+    chown -R ${POCKETMINE_USER}:${POCKETMINE_GROUP} ${POCKETMINE_STORE_DIR}/*
+
+    # Start PocketMine Server service
+    cd ${POCKETMINE_STORE_DIR}
+    exec chpst -u ${POCKETMINE_USER}:${POCKETMINE_GROUP} \
+      /var/vcap/packages/php/bin/php5/bin/php \
+      /var/vcap/packages/pocketmine/PocketMine-MP.phar \
+      >>${POCKETMINE_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
+      2>>${POCKETMINE_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
+    ;;
+
+  stop)
+    # Stop PocketMine Server service
+    kill_and_wait ${POCKETMINE_PID_FILE}
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0

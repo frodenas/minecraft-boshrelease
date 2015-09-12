@@ -1,0 +1,176 @@
+# Main configuration file for PocketMine-MP
+# These settings are the ones that cannot be included in server.properties
+# Some of these settings are safe, others can break your server if modified incorrectly
+# New settings/defaults won't appear automatically on this file when upgrading.
+
+settings:
+  #Three-letter language code for server-side localization
+  #Check your language code on https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
+  language: "<%= p('pocketmine.settings.language') %>"
+  #Whether to send all strings translated to server locale or let the device handle them
+  force-language: <%= p('pocketmine.settings.force_language') %>
+  shutdown-message: "<%= p('pocketmine.settings.shutdown_message') %>"
+  #Allow listing plugins via Query
+  query-plugins: <%= p('pocketmine.settings.query_plugins') %>
+  #Show a console message when a plugin uses deprecated API methods
+  deprecated-verbose: <%= p('pocketmine.settings.deprecated_verbose') %>
+  #Enable plugin and core profiling by default
+  enable-profiling: <%= p('pocketmine.settings.enable_profiling') %>
+  #Will only add results when tick measurement is below or equal to given value (default 20)
+  profile-report-trigger: <%= p('pocketmine.settings.profile_report_trigger') %>
+  #Number of AsyncTask workers.
+  #Used for plugin asynchronous tasks, world generation, compression and web communication.
+  #Set this approximately to your number of cores.
+  #If set to auto, it'll try to detect the number of cores (or use 2)
+  async-workers: <%= p('pocketmine.settings.async_workers') %>
+
+memory:
+  #Global soft memory limit in megabytes. Set to 0 to disable
+  #This will trigger low-memory-triggers and fire an event to free memory when the usage goes over this
+  global-limit: <%= p('pocketmine.memory.global_limit') %>
+
+  #Main thread soft memory limit in megabytes. Set to 0 to disable
+  #This will trigger low-memory-triggers and fire an event to free memory when the usage goes over this
+  main-limit: <%= p('pocketmine.memory.main_limit') %>
+
+  #Main thread hard memory limit in megabytes. Set to 0 to disable
+  #This will stop the server when the limit is surpassed
+  main-hard-limit: <%= p('pocketmine.memory.main_hard_limit') %>
+
+  #Period in ticks to check memory (default 1 second)
+  check-rate: <%= p('pocketmine.memory.check_rate') %>
+
+  #Continue firing low-memory-triggers and event while on low memory
+  continuous-trigger: <%= p('pocketmine.memory.continuous_trigger') %>
+
+  #Only if memory.continuous-trigger is enabled. Specifies the rate in memory.check-rate steps (default 30 seconds)
+  continuous-trigger-rate: <%= p('pocketmine.memory.continuous_trigger_rate') %>
+
+  garbage-collection:
+    #Period in ticks to fire the garbage collector manually (default 30 minutes), set to 0 to disable
+    #This only affect the main thread. Other threads should fire their own collections
+    period: <%= p('pocketmine.memory.garbage_collection.period') %>
+
+    #Fire asynchronous tasks to collect garbage from workers
+    collect-async-worker: <%= p('pocketmine.memory.garbage_collection.collect_async_worker') %>
+
+    #Trigger on low memory
+    low-memory-trigger: <%= p('pocketmine.memory.garbage_collection.low_memory_trigger') %>
+
+  max-chunks:
+    #Limit of chunks to load per player, overrides chunk-sending.max-chunks
+    trigger-limit: <%= p('pocketmine.memory.max_chunks.trigger_limit') %>
+
+    #Do chunk garbage collection on trigger
+    trigger-chunk-collect: <%= p('pocketmine.memory.max_chunks.trigger_chunk_collect') %>
+
+    #Trigger on low memory
+    low-memory-trigger: <%= p('pocketmine.memory.max_chunks.low_memory_trigger') %>
+
+  world-caches:
+    disable-chunk-cache: <%= p('pocketmine.memory.world_caches.disable_chunk_cache') %>
+    low-memory-trigger: <%= p('pocketmine.memory.world_caches.low_memory_trigger') %>
+
+network:
+  #Threshold for batching packets, in bytes. Only these packets will be compressed
+  #Set to 0 to compress everything, -1 to disable.
+  batch-threshold: <%= p('pocketmine.network.batch_threshold') %>
+  #Compression level used when sending batched packets. Higher = more CPU, less bandwidth usage
+  compression-level: <%= p('pocketmine.network.compression_level') %>
+  #Use AsyncTasks for compression. Adds half/one tick delay, less CPU load on main thread
+  async-compression: <%= p('pocketmine.network.async_compression') %>
+  #Experimental, only for Windows. Tries to use UPnP to automatically port forward
+  upnp-forwarding: <%= p('pocketmine.network.upnp_forwarding') %>
+
+debug:
+  #If > 1, it will show debug messages in the console
+  level: <%= p('pocketmine.debug.level') %>
+  #Enables /status, /gc
+  commands: <%= p('pocketmine.debug.commands') %>
+
+level-settings:
+  #The default format that levels will use when created
+  default-format: <%= p('pocketmine.level_settings.default_format') %>
+  #If true, converts from a format that is not the default to the default format on load
+  #NOTE: This is currently not implemented
+  convert-format: <%= p('pocketmine.level_settings.convert_format') %>
+  #Automatically change levels tick rate to maintain 20 ticks per second
+  auto-tick-rate: <%= p('pocketmine.level_settings.auto_tick_rate') %>
+  auto-tick-rate-limit: <%= p('pocketmine.level_settings.auto_tick_rate_limit') %>
+  #Sets the base tick rate (1 = 20 ticks per second, 2 = 10 ticks per second, etc.)
+  base-tick-rate: <%= p('pocketmine.level_settings.base_tick_rate') %>
+  #Tick all players each tick even when other settings disallow this.
+  always-tick-players: <%= p('pocketmine.level_settings.always_tick_players') %>
+
+chunk-sending:
+  #Amount of chunks sent to players per tick
+  per-tick: <%= p('pocketmine.chunk_sending.per_tick') %>
+  #Amount of chunks sent around each player
+  max-chunks: <%= p('pocketmine.chunk_sending.max_chunks') %>
+  #Amount of chunks that need to be sent before spawning the player
+  spawn-threshold: <%= p('pocketmine.chunk_sending.spawn_threshold') %>
+  #Save a serialized copy of the chunk in memory for faster sending
+  #Useful in mostly-static worlds where lots of players join at the same time
+  cache-chunks: <%= p('pocketmine.chunk_sending.cache_chunks') %>
+
+chunk-ticking:
+  #Max amount of chunks processed each tick
+  per-tick: <%= p('pocketmine.chunk_ticking.per_tick') %>
+  #Radius of chunks around a player to tick
+  tick-radius: <%= p('pocketmine.chunk_ticking.tick_radius') %>
+  light-updates: <%= p('pocketmine.chunk_ticking.light_updates') %>
+  clear-tick-list: <%= p('pocketmine.chunk_ticking.clear_tick_list') %>
+
+chunk-generation:
+  #Max. amount of chunks in the waiting queue to be generated
+  queue-size: <%= p('pocketmine.chunk_generation.queue_size') %>
+  #Max. amount of chunks in the waiting queue to be populated
+  population-queue-size: <%= p('pocketmine.chunk_generation.population_queue_size') %>
+
+ticks-per:
+  animal-spawns: <%= p('pocketmine.ticks_per.animal_spawns') %>
+  monster-spawns: <%= p('pocketmine.ticks_per.monster_spawns') %>
+  autosave: <%= p('pocketmine.ticks_per.autosave') %>
+  cache-cleanup: <%= p('pocketmine.ticks_per.cache_cleanup') %>
+
+spawn-limits:
+  monsters: <%= p('pocketmine.spawn_limits.monsters') %>
+  animals: <%= p('pocketmine.spawn_limits.animals') %>
+  water-animals: <%= p('pocketmine.spawn_limits.water_animals') %>
+  ambient: <%= p('pocketmine.spawn_limits.ambient') %>
+
+auto-report:
+  #Send crash reports for processing
+  enabled: <%= p('pocketmine.auto_report.enabled') %>
+  send-code: <%= p('pocketmine.auto_report.send_code') %>
+  send-settings: <%= p('pocketmine.auto_report.send_settings') %>
+  send-phpinfo: <%= p('pocketmine.auto_report.send_phpinfo') %>
+  host: <%= p('pocketmine.auto_report.host') %>
+
+anonymous-statistics:
+  #Sends anonymous statistics for data aggregation, plugin usage tracking
+  enabled: <%= p('pocketmine.anonymous_statistics.enabled') %>
+  host: <%= p('pocketmine.anonymous_statistics.host') %>
+
+auto-updater:
+  enabled: <%= p('pocketmine.auto_updater.enabled') %>
+  on-update:
+    warn-console: <%= p('pocketmine.auto_updater.on_update.warn_console') %>
+    warn-ops: <%= p('pocketmine.auto_updater.on_update.warn_ops') %>
+  #Can be development, beta or stable.
+  preferred-channel: <%= p('pocketmine.auto_updater.preferred_channel') %>
+  #If using a development version, it will suggest changing the channel
+  suggest-channels: <%= p('pocketmine.auto_updater.suggest_channels') %>
+  host: <%= p('pocketmine.auto_updater.host') %>
+
+aliases:
+  #Examples:
+  #showtheversion: version
+  #savestop: [save-all, stop]
+
+worlds:
+  #These settings will override the generator set in server.properties and allows loading multiple levels
+  #Example:
+  #world:
+  # seed: 404
+  # generator: FLAT:2;7,59x1,3x3,2;1;decoration(treecount=80 grasscount=45)

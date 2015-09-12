@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+#
+# Minecraft Server properties
+#
+
+# Directory to store the Minecraft Server configuration files
+export MINECRAFT_CONF_DIR=${JOB_DIR}/config
+
+# Directory to store the Minecraft Server log files
+export MINECRAFT_LOG_DIR=${LOG_DIR}
+
+# Directory to store the Minecraft Server process IDs
+export MINECRAFT_PID_DIR=${RUN_DIR}
+
+# Directory to store the Minecraft Server data files
+export MINECRAFT_STORE_DIR=${STORE_DIR}
+
+# Directory to store the Minecraft Server temp files
+export MINECRAFT_TMP_DIR=${TMP_DIR}
+
+# User which will own the Minecraft Server services
+export MINECRAFT_USER="<%= p('minecraft.user') %>"
+
+# Group which will own the Minecraft Server services
+export MINECRAFT_GROUP="<%= p('minecraft.group') %>"
+
+# Java Heap Size for Minecraft Server
+export MINECRAFT_JAVA_HEAP_SIZE="<%= p('minecraft.java_heap_size') %>"
+
+# Prefer IP v4 Stack
+export MINECRAFT_PREFER_IPV4_STACK=<%= p('minecraft.prefer_ipv4_stack') %>
+
+# Minecraft Server version to use
+export MINECRAFT_VERSION="<%= p('minecraft.version') %>"

@@ -1,0 +1,5 @@
+---
+name: pocketmine
+dependencies: {}
+files:
+  - pocketmine/PocketMine-MP_1.6dev-23_mcpe-0.12_79aa7583_API-1.13.0.tgz

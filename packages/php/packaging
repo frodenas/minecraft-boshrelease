@@ -1,0 +1,16 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=`grep -c ^processor /proc/cpuinfo`
+
+# We grab the latest versions that are in the directory
+PHP_VERSION=`ls -r php/PHP_*.tar.gz | sed 's/php\/PHP_\(.*\)\.tar\.gz/\1/' | head -1`
+
+# Extract PHP package
+echo "Extracting PHP ${PHP_VERSION}..."
+tar xzvf ${BOSH_COMPILE_TARGET}/php/PHP_${PHP_VERSION}.tar.gz -C ${BOSH_INSTALL_TARGET}
+if [[ $? != 0 ]] ; then
+  echo "Failed extracting PHP ${PHP_VERSION}"
+  exit 1
+fi

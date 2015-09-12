@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#
+# PocketMine Server properties
+#
+
+# Directory to store the PocketMine Server configuration files
+export POCKETMINE_CONF_DIR=${JOB_DIR}/config
+
+# Directory to store the PocketMine Server log files
+export POCKETMINE_LOG_DIR=${LOG_DIR}
+
+# Directory to store the PocketMine Server process IDs
+export POCKETMINE_PID_DIR=${RUN_DIR}
+
+# Directory to store the PocketMine Server data files
+export POCKETMINE_STORE_DIR=${STORE_DIR}
+
+# Directory to store the PocketMine Server temp files
+export POCKETMINE_TMP_DIR=${TMP_DIR}
+
+# User which will own the PocketMine Server services
+export POCKETMINE_USER="<%= p('pocketmine.user') %>"
+
+# Group which will own the PocketMine Server services
+export POCKETMINE_GROUP="<%= p('pocketmine.group') %>"

@@ -1,0 +1,69 @@
+---
+minecraft/minecraft_server.1.8.8.jar:
+  object_id: 5e9366f1-cef0-4b45-b7a3-feb1445ff3d1
+  sha: 5fafba3f58c40dc51b5c3ca72a98f62dfdae1db7
+  size: 8322852
+openjdk/openjdk-1.8.0_20.tar.gz:
+  object_id: 512b94df-fef9-404d-9f39-5af9b907477b
+  sha: 546a6f02174edf79fc2436a5ba130d83a0983fd7
+  size: 76876779
+minecraft/minecraft_server.1.7.10.jar:
+  object_id: ffdf9238-ddeb-4be3-bf3b-9effed1561c4
+  sha: 952438ac4e01b4d115c5fc38f891710c4941df29
+  size: 9605030
+minecraft/minecraft_server.1.7.2.jar:
+  object_id: 17e7df1c-a06d-4f0f-936f-4d5459ba1424
+  sha: 3716cac82982e7c2eb09f83028b555e9ea606002
+  size: 9163955
+minecraft/minecraft_server.1.7.4.jar:
+  object_id: daa974d9-db7d-45c3-93d1-f19930f2221e
+  sha: 61220311cef80aecc4cd8afecd5f18ca6b9461ff
+  size: 9170551
+minecraft/minecraft_server.1.7.5.jar:
+  object_id: d67dd9e9-904d-411a-90e4-9e67b7d4bdd3
+  sha: e1d557b2e31ea881404e41b05ec15c810415e060
+  size: 9173673
+minecraft/minecraft_server.1.7.9.jar:
+  object_id: b125081c-28a7-44d1-9230-e222217b5538
+  sha: 4cec86a928ec171fdc0c6b40de2de102f21601b5
+  size: 9604581
+minecraft/minecraft_server.1.8.1.jar:
+  object_id: 63af1f79-1d5f-4b90-9fdd-a5367aa89d4a
+  sha: 68bfb524888f7c0ab939025e07e5de08843dac0f
+  size: 7903505
+minecraft/minecraft_server.1.8.2.jar:
+  object_id: 67c6277b-d8ef-49e5-8dd7-f8079697ba26
+  sha: a37bdd5210137354ed1bfe3dac0a5b77fe08fe2e
+  size: 9778127
+minecraft/minecraft_server.1.8.3.jar:
+  object_id: a3cabe0b-12c1-4ba4-a3ec-912f32f349e2
+  sha: 163ba351cb86f6390450bb2a67fafeb92b6c0f2f
+  size: 9778206
+minecraft/minecraft_server.1.8.4.jar:
+  object_id: 6f7a221a-7248-414c-9d1b-0100d9515351
+  sha: dd4b5eba1c79500390e0b0f45162fa70d38f8a3d
+  size: 9779346
+minecraft/minecraft_server.1.8.5.jar:
+  object_id: 1bd7b439-130a-4e87-a4f3-993f3a94eec9
+  sha: ea6dd23658b167dbc0877015d1072cac21ab6eee
+  size: 9781878
+minecraft/minecraft_server.1.8.6.jar:
+  object_id: fbc37289-2fa2-47a5-8b44-7d4e89391189
+  sha: 2bd44b53198f143fb278f8bec3a505dad0beacd2
+  size: 9780573
+minecraft/minecraft_server.1.8.7.jar:
+  object_id: 5fc036e1-e484-4b02-a6e4-93b044994c68
+  sha: 35c59e16d1f3b751cd20b76b9b8a19045de363a9
+  size: 9780646
+minecraft/minecraft_server.1.8.jar:
+  object_id: 95183b09-4cbd-43a2-9e5e-a0ed608c8a32
+  sha: a028f00e678ee5c6aef0e29656dca091b5df11c7
+  size: 10375504
+php/PHP_5.6.10_x86-64_Linux.tar.gz:
+  object_id: 90f8750c-3431-4b12-b231-0e857b3098c2
+  sha: d564f4d58275ca6f18250ee589ed2ddaddcd632e
+  size: 7920419
+pocketmine/PocketMine-MP_1.6dev-23_mcpe-0.12_79aa7583_API-1.13.0.tgz:
+  object_id: b1183483-cb3e-4c73-a97b-191ed59f1ed9
+  sha: 830adcb39874da3767ec78ea2a9ed2353b7d96d4
+  size: 607028

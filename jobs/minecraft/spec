@@ -1,0 +1,172 @@
+---
+name: minecraft
+
+packages:
+  - bosh-helpers
+  - java
+  - minecraft
+
+templates:
+  bin/job_properties.sh.erb: bin/job_properties.sh
+  bin/minecraft_ctl.erb: bin/minecraft_ctl
+  config/banned-ips.json.erb: config/banned-ips.json
+  config/banned-players.json.erb: config/banned-players.json
+  config/eula.txt.erb: config/eula.txt
+  config/ops.json.erb: config/ops.json
+  config/server.properties.erb: config/server.properties
+  config/usercache.json.erb: config/usercache.json
+  config/whitelist.json.erb: config/whitelist.json
+
+properties:
+  minecraft.user:
+    description: "User which will own the Minecraft Server services"
+    default: "root"
+  minecraft.group:
+    description: "Group which will own the Minecraft Server services"
+    default: "vcap"
+  minecraft.java_heap_size:
+    description: "Java Heap Size for Minecraft Server"
+    default: "1024M"
+  minecraft.prefer_ipv4_stack:
+    description: "Prefer IPv4 Stack"
+    default: true
+  minecraft.version:
+    description: "Minecraft Server version to use"
+  minecraft.accept_eula:
+    description: "Accept Minecraft Server EULA"
+    default: false
+  minecraft.allow_flight:
+    description: "Allows users to use flight on your server while in Survival mode, if they have a mod that provides flight installed"
+    default: false
+  minecraft.allow_nether:
+    description: "Allows players to travel to the Nether"
+    default: true
+  minecraft.announce_player_achievements:
+    description: "Allows server to announce when a player gets an achievement"
+    default: true
+  minecraft.difficulty:
+    description: "Defines the difficulty (such as damage dealt by mobs and the way hunger and poison affects players) of the server (0: Peaceful, 1: Easy, 2: Normal, 3: Hard)"
+    default: 1
+  minecraft.enable_command_block:
+    description: "Enables command blocks"
+    default: false
+  minecraft.enable_query:
+    description: "Enables GameSpy4 protocol server listener. Used to get information about server"
+    default: true
+  minecraft.enable_rcon:
+    description: "Enables remote access to the server console"
+    default: false
+  minecraft.force_gamemode:
+    description: "Force players to join in the default game mode"
+    default: false
+  minecraft.gamemode:
+    description: "Defines the mode of gameplay (0: Survival, 1: Creative, 2: Adventure, 3: Spectator)"
+    default: 0
+  minecraft.generate_structures:
+    description: "Defines whether structures (such as villages) will be generated"
+    default: true
+  minecraft.generator_settings:
+    description: "The settings used to customize world generation"
+    default: ""
+  minecraft.hardcore:
+    description: "If set to true, players will be permanently banned if they die"
+    default: false
+  minecraft.level_name:
+    description: "World name and its folder name"
+    default: "world"
+  minecraft.level_seed:
+    description: "Seed for your world"
+    default: ""
+  minecraft.level_type:
+    description: "Determines the type of map that is generated (DEFAULT, FLAT, LARGEBIOMES, AMPLIFIED, CUSTOMIZED)"
+    default: "DEFAULT"
+  minecraft.max_build_height:
+    description: "The maximum height in which building is allowed. Terrain may still naturally generate above a low height limit"
+    default: 256
+  minecraft.max_players:
+    description: "The maximum number of players that can play on the server at the same time"
+    default: 20
+  minecraft.max_tick_time:
+    description: "The maximum number of milliseconds a single tick may take before the server watchdog stops the server with the message"
+    default: 60000
+  minecraft.max_world_size:
+    description: "This sets the maximum possible size in blocks, expressed as a radius, that the world border can obtain"
+    default: 29999984
+  minecraft.motd:
+    description: "This is the message that is displayed in the server list of the client, below the name"
+    default: "A Minecraft Server"
+  minecraft.network_compression_threshold:
+    description: "By default it allows packets that are n-1 bytes big to go normally, but a packet that n bytes or more will be compressed down. So, lower number means more compression but compressing small amounts of bytes might actually end up with a larger result than what went in"
+    default: 256
+  minecraft.online_mode:
+    description: "Server checks connecting players against minecraft's account database. Only set this to false if your server is not connected to the Internet. Hackers with fake accounts can connect if this is set to false!"
+    default: true
+  minecraft.op_permission_level:
+    description: "Sets permission level for ops"
+    default: 4
+  minecraft.player_idle_timeout:
+    description: "If non-zero, players are kicked from the server if they are idle for more than that many minutes"
+    default: 0
+  minecraft.pvp:
+    description: "Enable PvP on the server. Players shooting themselves with arrows will only receive damage if PvP is enabled"
+    default: true
+  minecraft.query_port:
+    description: "Sets the port for the query serve"
+    default: 25565
+  minecraft.rcon_password:
+    description: "Sets the password to rcon."
+    default: ""
+  minecraft.rcon_port:
+    description: "Sets the port to rcon"
+    default: 25575
+  minecraft.resource_pack:
+    description: "Optional URI to a resource pack. The player may choose to use it"
+    default: ""
+  minecraft.resource_pack_hash:
+    description: "Optional SHA-1 digest of the resource pack, in lowercase hexadecimal"
+    default: ""
+  minecraft.server_ip:
+    description: "Set this if you want the server to bind to a particular IP"
+    default: ""
+  minecraft.server_port:
+    description: "Changes the port the server is hosting (listening) on"
+    default: 25565
+  minecraft.snooper_enabled:
+    description: "Sets whether the server sends snoop data regularly to http://snoop.minecraft.net"
+    default: true
+  minecraft.spawn_animals:
+    description: "Determines if animals will be able to spawn"
+    default: true
+  minecraft.spawn_monsters:
+    description: "Determines if monsters will be spawned"
+    default: true
+  minecraft.spawn_npcs:
+    description: "Determines if villagers will be spawned"
+    default: true
+  minecraft.spawn_protection:
+    description: "Determines the radius of the spawn protection"
+    default: 16
+  minecraft.use_native_transport:
+    description: "Linux server performance improvements: optimized packet sending/receiving on Linux"
+    default: true
+  minecraft.view_distance:
+    description: "Sets the amount of world data the server sends the client, measured in chunks in each direction of the player (radius, not diameter). It determines the server-side viewing distance"
+    default: 10
+  minecraft.white_list:
+    description: "Enables a whitelist on the server"
+    default: false
+  minecraft.banned_ips:
+    description: "Array of banned IPs"
+    default: []
+  minecraft.banned_players:
+    description: "Array of banned players"
+    default: []
+  minecraft.ops:
+    description: "Array of ops"
+    default: []
+  minecraft.usercache:
+    description: "Array of usercache"
+    default: []
+  minecraft.whitelist:
+    description: "Array of whitelists"
+    default: []
