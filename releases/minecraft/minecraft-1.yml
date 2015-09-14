@@ -1,0 +1,44 @@
+---
+packages:
+- name: bosh-helpers
+  version: 322337804eaa76ef4e7f75c4fadaabd35864a987
+  fingerprint: 322337804eaa76ef4e7f75c4fadaabd35864a987
+  sha1: 24a89a515b13cb229bbacd21f76368e8416d6f7a
+  dependencies: []
+- name: java
+  version: a1f1a2eb9c2ebae0e33c13803acf99621c34e7ff
+  fingerprint: a1f1a2eb9c2ebae0e33c13803acf99621c34e7ff
+  sha1: 4ba8e04fe9a356fc6844abaff5759eb9b47f0432
+  dependencies: []
+- name: minecraft
+  version: c0ef119c4602846f1fa9be42aadb30d4c33ae413
+  fingerprint: c0ef119c4602846f1fa9be42aadb30d4c33ae413
+  sha1: 6d221c004b86cfa40c0554165c0c1fb7e8811338
+  dependencies: []
+- name: php
+  version: e51561e0d259e04de5a31906cc5e2cb986b6f10d
+  fingerprint: e51561e0d259e04de5a31906cc5e2cb986b6f10d
+  sha1: 924b60923d175b94a1f5740856f3a4b29b1efa7e
+  dependencies: []
+- name: pocketmine
+  version: bdd8827fa537308f0eee6d69f12a06350fc144fd
+  fingerprint: bdd8827fa537308f0eee6d69f12a06350fc144fd
+  sha1: ea97b9690fda3fdd857dadd7ba6b16e1d1bcec9a
+  dependencies: []
+jobs:
+- name: minecraft
+  version: a8f4b06e8ee6c0bf79e592bdc0f38f80cccac738
+  fingerprint: a8f4b06e8ee6c0bf79e592bdc0f38f80cccac738
+  sha1: b162bab0584c900e83a75f2bc7c871a996a06faf
+- name: pocketmine
+  version: d32885adc8a731cae832113b87701d70d8fa8e03
+  fingerprint: d32885adc8a731cae832113b87701d70d8fa8e03
+  sha1: 8a6bbddeadf4e81ac86625f37e363b706cc2c5b8
+license:
+  version: 177c113663fe9b8f50aa800f1858f3c1a59f635a
+  fingerprint: 177c113663fe9b8f50aa800f1858f3c1a59f635a
+  sha1: e3e53cf15357c5853be32f3851b1991c2c9381dd
+commit_hash: 49dd4c52
+uncommitted_changes: true
+name: minecraft
+version: '1'
